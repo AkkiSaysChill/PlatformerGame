@@ -1,8 +1,8 @@
 #include "rlImGui.h"
+#include "src/enemy.h"
 #include "src/game.h"
 #include "src/menu.h"
 #include "src/player.h"
-#include <iostream>
 #include <raylib.h>
 
 int main() {
@@ -11,6 +11,7 @@ int main() {
   Player player;
   Menu menu;
   Game game;
+  Enemy enemy;
 
   rlImGuiSetup(true);
   SetTargetFPS(60);
@@ -20,6 +21,7 @@ int main() {
   while (!WindowShouldClose()) {
     player.Update();
     menu.Update(player);
+    enemy.Update(&player);
 
     BeginDrawing();
     ClearBackground(BLACK);

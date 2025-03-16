@@ -1,5 +1,6 @@
 #include "menu.h"
 // #include "enemy.h"
+#include "game.h"
 #include "player.h"
 #include "rlImGui.h"
 #include <imgui.h>
@@ -21,6 +22,8 @@ void Menu::Draw(Player &player) {
   if (!isOpen)
     return; // If menu is closed, do nothing
 
+  Game game;
+
   rlImGuiBegin();
   // Enemy enemy;
   if (ImGui::Begin("Menu", NULL, ImGuiWindowFlags_AlwaysAutoResize)) {
@@ -33,7 +36,8 @@ void Menu::Draw(Player &player) {
     ImGui::SliderFloat("position y", &player.position.y, -GetScreenHeight(),
                        GetScreenHeight());
     ImGui::SliderFloat("Gravity", &player.g, 0.0001f, 1.0f);
-    // ImGui::Text("Distance: %.2f", enemy.CalculateDistance(&player));
+    ImGui::Text("Distance: %.2f", game.CheckDistance(&player));
+
     if (ImGui::Button("isGrounded")) {
       player.isGrounded = !player.isGrounded;
     }
